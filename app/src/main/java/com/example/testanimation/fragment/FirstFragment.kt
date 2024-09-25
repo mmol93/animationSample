@@ -23,7 +23,6 @@ import com.example.testanimation.constant.PAYMENT_PRICE_TRANSITION
 import com.example.testanimation.constant.PAYMENT_TITLE_TRANSITION
 import com.example.testanimation.databinding.FragmentFirstBinding
 import com.example.testanimation.model.paymentDetails
-import java.util.concurrent.TimeUnit
 
 class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
@@ -57,13 +56,12 @@ class FirstFragment : Fragment() {
                     args = bundle,
                     navOptions = null,
                     navigatorExtras = FragmentNavigatorExtras(
-                        v.findViewById<TextView>(R.id.payment_title_text) to PAYMENT_TITLE_TRANSITION,
-                        v.findViewById<TextView>(R.id.payment_price_text) to PAYMENT_PRICE_TRANSITION,
-                        v.findViewById<TextView>(R.id.payment_date_text) to PAYMENT_DATE_TRANSITION,
+                        v.findViewById<TextView>(R.id.payment_title_text) to PAYMENT_TITLE_TRANSITION + position.toString(),
+                        v.findViewById<TextView>(R.id.payment_price_text) to PAYMENT_PRICE_TRANSITION + position.toString(),
+                        v.findViewById<TextView>(R.id.payment_date_text) to PAYMENT_DATE_TRANSITION + position.toString(),
                     )
                 )
             }
-            if (paymentAdapter.expectsTransition) postponeEnterTransition(100L, TimeUnit.MILLISECONDS)
             adapter = paymentAdapter
         }
         postponeEnterTransition()

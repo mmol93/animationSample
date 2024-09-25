@@ -17,28 +17,23 @@ class PaymentAdapter(
     RecyclerView.Adapter<PaymentAdapter.PaymentViewHolder>() {
 
     private var lastSelectedId: Int? = null
-    /**
-     * `true` if we are expecting a reenter transition from the detail fragment.
-     */
-    val expectsTransition: Boolean
-        get() = lastSelectedId != null
 
     inner class PaymentViewHolder(private val binding: ItemPaymentBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(paymentDetail: PaymentDetail, position: Int) {
             // binding을 통해 데이터 설정
             binding.paymentTitleText.text = paymentDetail.title
-            binding.paymentTitleText.transitionName = PAYMENT_TITLE_TRANSITION
+            binding.paymentTitleText.transitionName = PAYMENT_TITLE_TRANSITION + position.toString()
 
             binding.paymentPriceText.text = paymentDetail.price.toString()
-            binding.paymentPriceText.transitionName = PAYMENT_PRICE_TRANSITION
+            binding.paymentPriceText.transitionName = PAYMENT_PRICE_TRANSITION + position.toString()
 
             binding.paymentDateText.text = paymentDetail.paymentType
-            binding.paymentDateText.transitionName = PAYMENT_DATE_TRANSITION
+            binding.paymentDateText.transitionName = PAYMENT_DATE_TRANSITION + position.toString()
 
-            binding.root.setOnClickListener{
+            itemView.setOnClickListener{
                 lastSelectedId = paymentList[position].id.toInt()
-                clickEvent(itemView, paymentList[position].id.toInt())
+                clickEvent(it, paymentList[position].id.toInt())
             }
         }
     }

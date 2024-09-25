@@ -21,22 +21,22 @@ class SecondFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // These are the shared element transitions.
-        val transition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.slide_left)
-        sharedElementEnterTransition = transition
+        sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.slide_left)
+        sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.slide_left)
+        postponeEnterTransition(100, TimeUnit.MILLISECONDS)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        postponeEnterTransition(100, TimeUnit.MILLISECONDS)
         binding = FragmentSecondBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
         val paymentId = arguments?.getInt("paymentId")
 
-        binding.paymentTitleText.transitionName = PAYMENT_TITLE_TRANSITION
-        binding.paymentPriceText.transitionName = PAYMENT_PRICE_TRANSITION
-        binding.paymentDateText.transitionName = PAYMENT_DATE_TRANSITION
+        binding.paymentTitleText.transitionName = PAYMENT_TITLE_TRANSITION + paymentId
+        binding.paymentPriceText.transitionName = PAYMENT_PRICE_TRANSITION + paymentId
+        binding.paymentDateText.transitionName = PAYMENT_DATE_TRANSITION + paymentId
 
         startPostponedEnterTransition()
         binding.paymentTitleText.text = paymentDetails.find { paymentId == it.id.toIntOrNull() }?.title
