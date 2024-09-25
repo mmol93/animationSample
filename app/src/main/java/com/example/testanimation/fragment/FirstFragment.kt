@@ -26,11 +26,11 @@ class FirstFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         exitTransition = Fade(Fade.OUT).apply {
-            duration = LARGE_EXPAND_DURATION / 2
+            duration = LARGE_EXPAND_DURATION
             interpolator = FAST_OUT_LINEAR_IN
         }
         reenterTransition = Fade(Fade.IN).apply {
-            duration = LARGE_COLLAPSE_DURATION / 2
+            duration = LARGE_COLLAPSE_DURATION
             startDelay = LARGE_COLLAPSE_DURATION / 2
             interpolator = LINEAR_OUT_SLOW_IN
         }
