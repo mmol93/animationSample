@@ -18,9 +18,6 @@ import com.example.testanimation.constant.FAST_OUT_LINEAR_IN
 import com.example.testanimation.constant.LARGE_COLLAPSE_DURATION
 import com.example.testanimation.constant.LARGE_EXPAND_DURATION
 import com.example.testanimation.constant.LINEAR_OUT_SLOW_IN
-import com.example.testanimation.constant.PAYMENT_DATE_TRANSITION
-import com.example.testanimation.constant.PAYMENT_PRICE_TRANSITION
-import com.example.testanimation.constant.PAYMENT_TITLE_TRANSITION
 import com.example.testanimation.databinding.FragmentFirstBinding
 import com.example.testanimation.model.paymentDetails
 
@@ -50,15 +47,15 @@ class FirstFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
 
             val paymentAdapter = PaymentAdapter(paymentDetails) { v, position ->
-                val bundle = bundleOf("paymentId" to position)
+                val bundle = bundleOf("paymentId" to position-1)
                 v.findNavController().navigate(
                     R.id.action_firstFragment_to_secondFragment,
                     args = bundle,
                     navOptions = null,
                     navigatorExtras = FragmentNavigatorExtras(
-                        v.findViewById<TextView>(R.id.payment_title_text) to PAYMENT_TITLE_TRANSITION + position.toString(),
-                        v.findViewById<TextView>(R.id.payment_price_text) to PAYMENT_PRICE_TRANSITION + position.toString(),
-                        v.findViewById<TextView>(R.id.payment_date_text) to PAYMENT_DATE_TRANSITION + position.toString(),
+                        v.findViewById<TextView>(R.id.payment_title_text) to v.findViewById<TextView>(R.id.payment_title_text).transitionName,
+                        v.findViewById<TextView>(R.id.payment_price_text) to v.findViewById<TextView>(R.id.payment_price_text).transitionName,
+                        v.findViewById<TextView>(R.id.payment_date_text) to v.findViewById<TextView>(R.id.payment_date_text).transitionName,
                     )
                 )
             }

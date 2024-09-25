@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
@@ -21,8 +22,8 @@ class SecondFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // These are the shared element transitions.
-        sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.slide_left)
-        sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.slide_left)
+        sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
         postponeEnterTransition(100, TimeUnit.MILLISECONDS)
     }
 
@@ -38,10 +39,13 @@ class SecondFragment : Fragment() {
         binding.paymentPriceText.transitionName = PAYMENT_PRICE_TRANSITION + paymentId
         binding.paymentDateText.transitionName = PAYMENT_DATE_TRANSITION + paymentId
 
-        startPostponedEnterTransition()
-        binding.paymentTitleText.text = paymentDetails.find { paymentId == it.id.toIntOrNull() }?.title
-        binding.paymentPriceText.text = paymentDetails.find { paymentId == it.id.toIntOrNull() }?.price.toString()
-        binding.paymentDateText.text = paymentDetails.find { paymentId == it.id.toIntOrNull() }?.date
+        binding.paymentTitleText.text = paymentDetails[paymentId!!].title
+        binding.paymentPriceText.text = paymentDetails[paymentId].price.toString()
+        binding.paymentDateText.text = paymentDetails[paymentId].date
+
+        binding.root.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
