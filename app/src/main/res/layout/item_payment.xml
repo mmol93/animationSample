@@ -2,6 +2,7 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -26,11 +27,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/payment_type_text"
+                android:id="@+id/payment_price_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="2dp"
-                tools:text="payment_type" />
+                tools:text="payment_price" />
 
             <TextView
                 android:id="@+id/payment_date_text"
@@ -39,7 +40,6 @@
                 android:paddingVertical="2dp"
                 tools:text="payment_date" />
         </LinearLayout>
-
 
     </LinearLayout>
 </layout>

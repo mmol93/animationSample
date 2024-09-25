@@ -53,7 +53,10 @@ dependencies {
 
     val navVersion = "2.8.1"
     // Views/Fragments integration
-    implementation("androidx.navigation:navigation-fragment:$navVersion")
-    implementation("androidx.navigation:navigation-ui:$navVersion")
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-runtime-ktx:$navVersion")
 
+    val fragmentVersion = "1.8.3"
+    implementation("androidx.fragment:fragment-ktx:$fragmentVersion")
 }
